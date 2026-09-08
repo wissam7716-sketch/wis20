@@ -3056,7 +3056,7 @@ $bot_tlb = $rshq['bot_tlb'] ?? 0;
 $mytl = $rshq["cointlb"][$from_id] ?? 0;
 $share = $rshq["mshark"][$from_id] ?? 0;
 $tlby = $rshq["tlby"][$from_id] ?? 0;
-$start_message = $rshq['start_message'] ?? "مرحبا بك في بوت $nambot ![🌀](tg://emoji?id=5251203410396458957)\n• هذا البوت مختص لرشق جميع البرامج ![🛒](tg://emoji?id=5337080053119336309)\n\n![💰](tg://emoji?id=5280943438991214029) ] رصيدك : *{balance}* {currency}\n![ℹ️](tg://emoji?id=5341715473882955310) ] ايديك : `{user_id}`";
+$start_message = $rshq['start_message'] ?? "مرحبا بك في بوت تريليون 👑\n\n[💠] نقاطك : {balance}\n[🆔] ايديك : `{user_id}`";
 $chnl_clean = str_replace('@', '', $chnl);
 $RSALEH = [
 'inline_keyboard'=>[
@@ -3065,7 +3065,7 @@ $RSALEH = [
 [['text'=>"تجميع ️$currency_name",'callback_data'=>"plus","style"=>"danger","icon_custom_emoji_id"=>"4965219701572503640"], ['text'=>"اداره الحساب️",'callback_data'=>"acc","style"=>"danger","icon_custom_emoji_id"=>"5231200819986047254"]],
 [['text'=>"استخدام كود ",'callback_data'=>"hdia","style"=>"danger","icon_custom_emoji_id"=>"5445353829304387411"], ['text'=>"تحويل نقاط️",'callback_data'=>"transer","style"=>"danger","icon_custom_emoji_id"=>"5447410659077661506"]],
 [['text'=>"متابعه طلب",'callback_data'=>"infotlb","style"=>"danger","icon_custom_emoji_id"=>"5231012545799666522"],['text'=>"جميع طلباتي",'callback_data'=>"myrders","style"=>"danger","icon_custom_emoji_id"=>"5197269100878907942"]],
-[['text'=>"قنوات البوت ",'callback_data'=>"user_bot_channels","style" => "primary","icon_custom_emoji_id"=>"5864127571754489150"],['text'=>"قناه الاثبتات",'url'=>"https://t.me/$chnl_clean","style" => "primary","icon_custom_emoji_id" => "5854722989240619332"]],
+[['text'=>"قنوات البوت ",'callback_data'=>"user_bot_channels","style" => "primary","icon_custom_emoji_id"=>"5864127571754489150"],['text'=>"قناه الاثبتات",'url'=>"https://t.me/$chnl_clean","style" => "danger","icon_custom_emoji_id" => "5854722989240619332"]],
 [['text'=>"شحن نقاط ",'callback_data'=>"buy","style" => "primary","icon_custom_emoji_id" => "5359437015752401733"],['text'=>"الشروط ",'callback_data'=>"termss","style" => "primary","icon_custom_emoji_id" => "5334544901428229844"]],
 [['text'=>"قسم ماركت البوت ️",'callback_data'=>"user_market","style" => "primary","icon_custom_emoji_id" => "5895407084131848348"]],
 [['text'=>"عدد الطلبات : $bot_tlb ",'callback_data'=>"نن","style" => "success","icon_custom_emoji_id" => "6296577138615125756"]],
@@ -3389,10 +3389,7 @@ $message = preg_replace('/!!(.*?)!!/s', '<b>$1</b>', $message);
 return $message;
 }
 
-$start_message = $rshq['start_message'] ?? "مرحبا بك في بوت !! $nambot !! <tg-emoji emoji-id=\"6269232765468676321\">🌀</tg-emoji>\n• هذا البوت مختص لرشق جميع البرامج <tg-emoji emoji-id=\"5891162831809681617\">🛒</tg-emoji>
-!! • نوفر لك الخدمات بأرخص الاسعار وايضا الضمان:!! <tg-emoji emoji-id=\"5323261730283863478\">😎</tg-emoji> ~ <tg-emoji emoji-id=\"5327982530702359565\">😎</tg-emoji> ~ <tg-emoji emoji-id=\"5319160079465857105\">😎</tg-emoji> ~ <tg-emoji emoji-id=\"5334681713316479679\">😎</tg-emoji> ~ <tg-emoji emoji-id=\"5330237710655306682\">😎</tg-emoji>
-
-<tg-emoji emoji-id=\"5231005931550030290\">💰</tg-emoji> - رصيدك: !!{balance}!! {currency}\n<tg-emoji emoji-id=\"6271271702408204490\">ℹ️</tg-emoji> - ايديك: <code>{user_id}</code>";
+$start_message = $rshq['start_message'] ?? "مرحبا بك في بوت تريليون 👑\n\n[💠] نقاطك : <b>{balance}</b>\n[🆔] ايديك : <code>{user_id}</code>";
 
 function handleInvite($from_id, $inviter_id, $chat_id, $name, $user, &$rshq, &$SALEH, $db) {
 global $currency_name, $usrbot;
@@ -3526,7 +3523,7 @@ $reply_markup[] = [['text'=>"تجميع ️$currency_name",'callback_data'=>"plu
 $reply_markup[] = [['text'=>"استخدام كود ",'callback_data'=>"hdia","style"=>"primary","icon_custom_emoji_id"=>"5445353829304387411"], ['text'=>"تحويل نقاط️",'callback_data'=>"transer","style"=>"primary","icon_custom_emoji_id"=>"5447410659077661506"]];
 $reply_markup[] = [['text'=>"متابعه طلب",'callback_data'=>"infotlb","style"=>"primary","icon_custom_emoji_id"=>"5231012545799666522"],['text'=>"جميع طلباتي",'callback_data'=>"myrders","style"=>"primary","icon_custom_emoji_id"=>"5197269100878907942"]];
 $reply_markup[] = [['text'=>"شحن نقاط ",'callback_data'=>"buy","style" => "primary","icon_custom_emoji_id" => "5359437015752401733"],['text'=>"الشروط ",'callback_data'=>"termss","style" => "primary","icon_custom_emoji_id" => "6271786398404055377"]];
-$reply_markup[] = [['text'=>"قنوات البوت ",'callback_data'=>"user_bot_channels","style" => "danger","icon_custom_emoji_id"=>"5188540541922480562"],['text'=>"قناه الاثبتات",'url'=>"https://t.me/$chnl_clean","style" => "","icon_custom_emoji_id" => "5413879192267805083"]];
+$reply_markup[] = [['text'=>"قنوات البوت ",'callback_data'=>"user_bot_channels","style" => "danger","icon_custom_emoji_id"=>"5188540541922480562"],['text'=>"قناه الاثباتات",'url'=>"https://t.me/$chnl_clean","style" => "danger","icon_custom_emoji_id" => "5413879192267805083"]];
 $reply_markup[] = [['text'=>"عدد الطلبات : $bot_tlb ",'callback_data'=>"نن","style" => "success","icon_custom_emoji_id" => "5775911726633456945"]];
 }
 
