@@ -618,7 +618,7 @@ function SendGame($chat_id, $game_short_name, $reply_to_message_id = null, $repl
 		'reply_markup' => $reply_markup
 	]);
 }
-function InlineKeyBoard($inlinetext = [], $type, $contents = [], $standar = "column", $count = 1)
+function InlineKeyBoard($inlinetext, $type, $contents, $standar = "column", $count = 1)
 {
 	for ($i = 0; $i < $count; $i++) {
 
