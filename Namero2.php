@@ -5,7 +5,7 @@ header("Content-Type: application/json; charset=UTF-8");
 ob_start();
 date_default_timezone_set('Asia/Baghdad');
 
-$API_KEY = "8177219985:AAHii1xWe9tz3s-nHwfO5_7nUn8IgjnmfC4";
+$API_KEY = "8791647998:AAH2r4DPTsKmVkH_aR-4fkYXerOUDi0dy-w";
 define('API_KEY', $API_KEY);
 define("IDBot", explode(":", $API_KEY)[0]);
 
