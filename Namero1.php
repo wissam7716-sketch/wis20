@@ -97,7 +97,7 @@ $helper_name = $config['helper'];
 $member_name = $config['member'];
 $chanel_name = $config['chanel'];
 $izr_name = $config['izr'];
-$group_name = $confifg['grop'];
+$group_name = $config['grop'];
 $blockers_name = $config['block'];
 $tasks = json_decode(file_get_contents("$task_name"), true);
 $xts = json_decode(file_get_contents("$command_name"), true);
@@ -3853,8 +3853,8 @@ if (!in_array($from_id, $member_get)) {
     }
 }
 
-$chanel_get = explode('\n', file_get_contents("$chanel_name"));
-$group_get = explode('\n', file_get_contents("$group_name"));
+$chanel_get = explode('\n', @file_get_contents($chanel_name));
+$group_get = explode('\n', @file_get_contents($group_name));
 if($update->my_chat_member->chat->id){
     if($update->my_chat_member->chat->type == 'channel'){
 if (!in_array($update->my_chat_member->chat->id, $chanel_get)) {
