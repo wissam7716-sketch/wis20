@@ -7524,10 +7524,10 @@ $starts
 
 
  
-if($text == "/start" && $chat_id != $sudo && !in_array($chat_id, $admins)){
+if($text == "/start" && $chat_id != $sudo){
     if($hHSALEH != "I"){
         
-        // 1. بناء أزرار لوحة الأعضاء لكي لا تكون فارغة
+        // 1. بناء أزرار لوحة الأعضاء 
         $user_key = [];
         $user_key['inline_keyboard'][]=[['text'=>"الخدمات الرئيسيه 🛍️",'callback_data'=>"service"]];
         
@@ -7539,11 +7539,21 @@ if($text == "/start" && $chat_id != $sudo && !in_array($chat_id, $admins)){
         }
         
         $user_key['inline_keyboard'][]=[['text'=>"تجميع نقاط 🛍",'callback_data'=>"plus"], ['text'=>"اعدادات الحساب ⚙️",'callback_data'=>"account_settings"]];
-        $user_key['inline_keyboard'][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"hdia"], ['text'=>"تحويل ".$rshq["name3mla"]." ♻️",'callback_data'=>"transer"]];
+        $user_key['inline_keyboard'][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"hdia"], ['text'=>"تحويل ".$name3mla." ♻️",'callback_data'=>"transer"]];
         $user_key['inline_keyboard'][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"infotlb"],['text'=>"طلباتي 🔇",'callback_data'=>"myrders"]];
         $user_key['inline_keyboard'][]=[['text'=>"التحديثات  ⚙️",'url'=>"https://t.me/".str_replace('@','',$rshq['cha']??"")] ,['text'=>"الاحصائيات 📊",'callback_data'=>"Namero"]];
-        $user_key['inline_keyboard'][]=[['text'=>"شراء ".$rshq["name3mla"]." ‍💎",'callback_data'=>"buy"],['text'=>"الشروط 🗒",'callback_data'=>"termss"]];
+        $user_key['inline_keyboard'][]=[['text'=>"شراء ".$name3mla." ‍💎",'callback_data'=>"buy"],['text'=>"الشروط 🗒",'callback_data'=>"termss"]];
         $user_key['inline_keyboard'][]=[['text'=>"عدد الطلبات : ".$bot_tlb." 📣",'callback_data'=>"jj"]];
+
+        bot("sendmessage",[
+            'chat_id' => $chat_id,
+            'text' => $starts,
+            'parse_mode' => 'MaRKDOWN',
+            'reply_to_message_id' => $message_id,
+            "reply_markup" => json_encode($user_key), 
+        ]);
+    }
+}
 
         // جلب الأزرار الشفافة الإضافية (إن وجدت)
         $zr_data = json_decode(@file_get_contents("FCZR/". X_ . "/zr.json"), true);
@@ -7651,21 +7661,35 @@ bot('EditMessageText',[
 
 
 if($data == "tobot") {
-    // 1. بناء أزرار لوحة الأعضاء 
     $user_key = [];
     $user_key['inline_keyboard'][]=[['text'=>"الخدمات الرئيسيه 🛍️",'callback_data'=>"service"]];
+    
     if (($rshq['ads']['status'] ?? 'off') == 'on') {
         $user_key['inline_keyboard'][] = [['text'=>"خدمات الإعلانات 📢",'callback_data'=>"post_ad_start" ]];
     }
     if(isset($rshq['FREE']) && $rshq['FREE'] == "TR") { 
         $user_key['inline_keyboard'][] = [['text'=>"تمويل قناتك او مجموعه 👥",'callback_data'=>"tmoile" ]];
     }
+    
     $user_key['inline_keyboard'][]=[['text'=>"تجميع نقاط 🛍",'callback_data'=>"plus"], ['text'=>"اعدادات الحساب ⚙️",'callback_data'=>"account_settings"]];
-    $user_key['inline_keyboard'][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"hdia"], ['text'=>"تحويل ".$rshq["name3mla"]." ♻️",'callback_data'=>"transer"]];
+    $user_key['inline_keyboard'][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"hdia"], ['text'=>"تحويل ".$name3mla." ♻️",'callback_data'=>"transer"]];
     $user_key['inline_keyboard'][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"infotlb"],['text'=>"طلباتي 🔇",'callback_data'=>"myrders"]];
     $user_key['inline_keyboard'][]=[['text'=>"التحديثات  ⚙️",'url'=>"https://t.me/".str_replace('@','',$rshq['cha']??"")] ,['text'=>"الاحصائيات 📊",'callback_data'=>"Namero"]];
-    $user_key['inline_keyboard'][]=[['text'=>"شراء ".$rshq["name3mla"]." ‍💎",'callback_data'=>"buy"],['text'=>"الشروط 🗒",'callback_data'=>"termss"]];
+    $user_key['inline_keyboard'][]=[['text'=>"شراء ".$name3mla." ‍💎",'callback_data'=>"buy"],['text'=>"الشروط 🗒",'callback_data'=>"termss"]];
     $user_key['inline_keyboard'][]=[['text'=>"عدد الطلبات : ".$bot_tlb." 📣",'callback_data'=>"jj"]];
+
+    bot('EditMessageText',[
+        'chat_id'=>$chat_id,
+        'message_id'=>$message_id,
+        'text'=> $starts,
+        'parse_mode'=>"markdown",
+        'reply_markup'=>json_encode($user_key)
+    ]);
+    
+    $modes['mode'][$from_id] = null ;
+    SETJSON($rshq) ;
+    return false ;
+}
 
     // جلب الأزرار الشفافة الإضافية
     $zr_data = json_decode(@file_get_contents("FCZR/". X_ . "/zr.json"), true);
