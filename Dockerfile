@@ -1,4 +1,5 @@
 FROM php:8.2-fpm
+
 RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
 
 COPY . /var/www/html
@@ -7,7 +8,7 @@ WORKDIR /var/www/html
 RUN echo 'server { \
     listen 8080; \
     root /var/www/html; \
-    index Namero.php index.php index.html; \
+    index Namero.php index.php; \
     location / { \
         try_files $uri $uri/ /Namero.php?$query_string; \
     } \
@@ -19,4 +20,5 @@ RUN echo 'server { \
 }' > /etc/nginx/sites-available/default
 
 EXPOSE 8080
-CMD service nginx start && php-fpm
+
+CMD ["sh", "-c", "php-FPM -D && nginx -g 'daemon off;'"]
