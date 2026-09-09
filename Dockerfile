@@ -6,7 +6,7 @@ COPY . /var/www/html
 WORKDIR /var/www/html
 
 RUN echo 'server { \
-    listen 8080; \
+    listen __PORT__; \
     root /var/www/html; \
     index Namero.php index.php; \
     location / { \
@@ -19,6 +19,4 @@ RUN echo 'server { \
     } \
 }' > /etc/nginx/sites-available/default
 
-EXPOSE 8080
-
-CMD ["sh", "-c", "php-FPM -D && nginx -g 'daemon off;'"]
+CMD ["sh", "-c", "sed -i 's/__PORT__/'${PORT:-8080}'/g' /etc/nginx/sites-available/default && php-fpm -D && nginx -g 'daemon off;'"]
