@@ -7524,7 +7524,7 @@ $starts
 
 
  
-if ($text == "/start" && $chat_id != $sudo) {
+if ($text == "/start" && $chat_id != $sudo && !in_array($chat_id, $admins)) {
     if ($hHSALEH != "I") {
         $user_key = [];
         $user_key['inline_keyboard'][] = [['text' => "الخدمات الرئيسيه 🛍️", 'callback_data' => "service"]];
@@ -7544,7 +7544,7 @@ if ($text == "/start" && $chat_id != $sudo) {
         $user_key['inline_keyboard'][] = [['text' => "عدد الطلبات : " . $bot_tlb . " 📣", 'callback_data' => "jj"]];
 
         // جلب الأزرار الشفافة الإضافية
-        $zr_data = json_decode(@file_get_contents("FCZR/" . X_ . "/zr.json"), true);
+        $zr_data = json_decode(@file_get_contents("FCZR/" . USR_BOT . "/zr.json"), true);
         if (isset($zr_data['id']) && is_array($zr_data['id'])) {
             $addedIds_user = [];
             foreach ($zr_data['id'] as $i) {
@@ -7657,7 +7657,7 @@ if ($data == "tobot") {
     $user_key['inline_keyboard'][] = [['text' => "عدد الطلبات : " . $bot_tlb . " 📣", 'callback_data' => "jj"]];
 
     // جلب الأزرار الشفافة الإضافية
-    $zr_data = json_decode(@file_get_contents("FCZR/" . X_ . "/zr.json"), true);
+    $zr_data = json_decode(@file_get_contents("FCZR/" . USR_BOT . "/zr.json"), true);
     if (isset($zr_data['id']) && is_array($zr_data['id'])) {
         $addedIds_user = [];
         foreach ($zr_data['id'] as $i) {
