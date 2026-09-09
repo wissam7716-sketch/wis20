@@ -28,7 +28,10 @@ define("IDBot", explode(":", $API_KEY)[0]);
 
 
 
-echo file_get_contents("https://api.telegram.org/bot" . API_KEY . "/setwebhook?url=" . $_SERVER['SERVER_NAME'] . "" . $_SERVER['SCRIPT_NAME']);
+if(isset($_GET['setup'])){
+    echo file_get_contents("https://api.telegram.org/bot" . API_KEY . "/setwebhook?url=https://" . $_SERVER['SERVER_NAME'] . "" . $_SERVER['SCRIPT_NAME']);
+    exit;
+}
 
 function replaceTextInJson($data, $search, $replace) {
     foreach ($data as $key => $value) {
