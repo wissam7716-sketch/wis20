@@ -148,10 +148,10 @@ mkdir("RSHQ") ;
 mkdir("RSHQ/ALLS") ;
 mkdir("RSHQ/ALLS/". USR_BOT) ;
 
-$forwardM=json_decode(file_get_contents("forwardM.json"),1);
-$Js=json_decode(file_get_contents("Js.json"),1);
-$Ds=json_decode(file_get_contents("Ds.json"),1);
-$Vs=json_decode(file_get_contents("Users/Vs.json"),1);
+$forwardM=json_decode(@file_get_contents("forwardM.json"),1);
+$Js=json_decode(@file_get_contents("Js.json"),1);
+$Ds=json_decode(@file_get_contents("Ds.json"),1);
+$Vs=json_decode(@file_get_contents("Users/Vs.json"),1);
 
 function Add($path, $content)
 {
@@ -1247,7 +1247,9 @@ SV("$path/Vs.json",$Vs);
 }
 }
 
-$update = json_decode(file_get_contents('php://input'));
+if (!$update && !isset($_GET['setup'])) {
+    die("البوت يعمل بشكل سليم. تم تفعيل هذه الصفحة لاستقبال الطلبات من تليجرام فقط.");
+}
 if($update->message){
 	$message = $update->message;
 $message_id = $update->message->message_id;
@@ -1267,12 +1269,12 @@ $modesFile = "RSHQ/ALLS/" . USR_BOT . "/modes.json";
 $SALEHFile = "RSHQ/ALLS/" . USR_BOT . "/share.json";
 $a3thuFILE = "RSHQ/ALLS/" . USR_BOT . "/A3thu.json";
 $tlbsFILE = "RSHQ/ALLS/" . USR_BOT . "/tlbsme.json";
-$tlbsme = json_decode(file_get_contents($tlbsFILE), true);
+$tlbsme = json_decode(@file_get_contents($tlbsFILE), true);
 $transferLogFile = "RSHQ/ALLS/". USR_BOT. "/transfer_log.json";
-$transferLog = json_decode(file_get_contents($transferLogFile), true);
+$transferLog = json_decode(@file_get_contents($transferLogFile), true);
 
-$timer = json_decode(file_get_contents($timerFile), true);
-$rshq = json_decode(file_get_contents($rshqFile), true);
+$timer = json_decode(@file_get_contents($timerFile), true);
+$rshq = json_decode(@file_get_contents($rshqFile), true);
 // # --- بداية كود الحذف التلقائي للإعلانات --- #
 if (isset($rshq['ads']['scheduled_deletions']) && is_array($rshq['ads']['scheduled_deletions'])) {
     $current_time = time();
@@ -1302,10 +1304,10 @@ if (isset($rshq['ads']['scheduled_deletions']) && is_array($rshq['ads']['schedul
 }
 // # --- نهاية كود الحذف التلقائي للإعلانات --- #
 
-$tmoil = json_decode(file_get_contents($tmoilFile), true);
-$modes = json_decode(file_get_contents($modesFile), true);
-$SALEH = json_decode(file_get_contents($SALEHFile), true);
-$a3thu = json_decode(file_get_contents($a3thuFILE), true);
+$tmoil = json_decode(@file_get_contents($tmoilFile), true);
+$modes = json_decode(@file_get_contents($modesFile), true);
+$SALEH = json_decode(@file_get_contents($SALEHFile), true);
+$a3thu = json_decode(@file_get_contents($a3thuFILE), true);
 $secn = $rshq['timers_sec'] ?? "3";
 
     if ($update->callback_query) {
@@ -8217,12 +8219,36 @@ if($data == "play_wheel_game") {
 }
 
 
-if($rshq['trend'] != "x"){
-$SALEH = json_decode(file_get_contents("RSHQ/ALLS/".USR_BOT."/SALEH.json"),1);
-$f= $SALEH['SALEH']['send']['add'];
-rsort($f);
-var_dump($f);
-for($i=0;$i<5;$i++){
+if(isset($rshq['trend']) && $rshq['trend'] != "x"){
+    $saleh_path = "RSHQ/ALLS/".USR_BOT."/SALEH.json";
+    $SALEH = file_exists($saleh_path) ? json_decode(file_get_contents($saleh_path),1) : [];
+    
+    // التأكد من أن البيانات موجودة وأنها مصفوفة فعلاً قبل الترتيب
+    if(isset($SALEH['SALEH']['send']['add']) && is_array($SALEH['SALEH']['send']['add']) && !empty($SALEH['SALEH']['send']['add'])){
+        $f = $SALEH['SALEH']['send']['add'];
+        rsort($f);
+        
+        $limit = min(5, count($f)); // لتجنب الأخطاء إذا كان عدد المشتركين أقل من 5
+        for($i=0; $i<$limit; $i++){
+            $dets = json_decode(@file_get_contents("http://api.telegram.org/bot".API_KEY."/getChat?chat_id=".$f[$i]));
+            $name = $dets->result->title ?? "مستخدم";
+            
+            if($f[$i] != null){
+                $V = array_search($f[$i],$SALEH['SALEH']['send']['add']);
+                $uS = $SALEH['SALEH']['send']['uname'][$V];
+                $u=$i+1;
+
+                $Numbers = array('1','2','3','4','5');
+                $NumbersBe = array('🥇','🥈','🥉','🏅','🏅');
+                $u = str_replace($Numbers,$NumbersBe,$u);
+
+                $dh = json_decode(@file_get_contents("http://api.telegram.org/bot".API_KEY."/getChat?chat_id=".$uS));
+                $fk = $dh->result->title ?? $uS;
+                $ok = ($ok ?? "") . " $u ★ *$f[$i]* -> [$fk](tg://user?id=$uS) \n";
+            }
+        }
+    }
+}
 $dets = json_decode(file_get_contents("http://api.telegram.org/bot$token/getChat?chat_id=$f[$i]"));
 $name =$dets->result->title;
 if($f[$i] != null){
