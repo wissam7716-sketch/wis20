@@ -144,9 +144,9 @@ function SETJSON16($INPUT){
       
   }
 }
-mkdir("RSHQ") ;
-mkdir("RSHQ/ALLS") ;
-mkdir("RSHQ/ALLS/". USR_BOT) ;
+@mkdir("RSHQ");
+@mkdir("RSHQ/ALLS");
+@mkdir("RSHQ/ALLS/". USR_BOT);
 
 $forwardM=json_decode(@file_get_contents("forwardM.json"),1);
 $Js=json_decode(@file_get_contents("Js.json"),1);
@@ -708,10 +708,11 @@ return $d;}
 if (!is_dir("Users")) { // used to make dir
 mkdir("Users");
 }
-function isthere($path) // check member.txt & chat.txt & allchat.txt
+function isthere($path) 
 {
-$exx = explode("\n", file_get_contents($path));
-return $exx;
+    if(!file_exists($path)) { @file_put_contents($path, ""); return []; }
+    $exx = explode("\n", file_get_contents($path));
+    return $exx;
 }
 // # --- [v3] بداية كود نظام المغادرة الصارم (الدالة) --- #
 // (تحديث v4: يدعم الخصم بالسالب)
@@ -845,6 +846,10 @@ function showStrictLeaveMenu($chat_id, $message_id, $rshq, $NamesBACK) {
 
 
 $update     = json_decode(file_get_contents('php://input'));
+
+if (!$update && !isset($_GET['setup'])) {
+    die("البوت يعمل بشكل سليم. تم تفعيل هذه الصفحة لاستقبال الطلبات من تليجرام فقط.");
+}
 
 if (isset($update)) {
 
@@ -1247,9 +1252,6 @@ SV("$path/Vs.json",$Vs);
 }
 }
 
-if (!$update && !isset($_GET['setup'])) {
-    die("البوت يعمل بشكل سليم. تم تفعيل هذه الصفحة لاستقبال الطلبات من تليجرام فقط.");
-}
 if($update->message){
 	$message = $update->message;
 $message_id = $update->message->message_id;
