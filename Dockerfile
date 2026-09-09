@@ -3,4 +3,6 @@ FROM php:8.2-cli
 COPY . /app
 WORKDIR /app
 
-CMD sh -c "php -S 0.0.0.0:\$PORT Namero.php"
+RUN chmod +x start.sh
+
+CMD ["./start.sh"]
