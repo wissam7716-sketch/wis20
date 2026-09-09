@@ -952,9 +952,9 @@ $webhost = "https://" . $_SERVER['SERVER_NAME'] . "" . $_SERVER['SCRIPT_NAME']; 
 $path= "Users"; # مسار مجلد الخزن 
 if($Js['bot']['startB']==null){$Js['bot']['startB']=0;SV("Js.json",$Js);} 
 $startB=$Js['bot']['startB']; 
-$Members = count(isthere("$path/member.txt")) - 1;
-$Groups= count(isthere("$path/chat.txt")) - 1;
-$allchat = count(isthere("$path/allchat.txt")) - 1;
+$Members = max(0, count((array)isthere("$path/member.txt")) - 1);
+$Groups= max(0, count((array)isthere("$path/chat.txt")) - 1);
+$allchat = max(0, count((array)isthere("$path/allchat.txt")) - 1);
 
 if(in_array($data,['br:forwardmessage:p','br:forwardmessage:g','br:forwardmessage:all','br:copymessage:p','br:copymessage:g','br:copymessage:all'])){
 $button =['رجوع']; $keys = ['broDa']; $keyboard2 = InlineKeyBoard($button, 'callback_data', $keys, 'column', 1);
