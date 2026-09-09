@@ -2556,8 +2556,8 @@ file_put_contents("$mode_name",json_encode($modes));
 $id = $update->inline_query->from->id; 
 $rr = rand(0,99999999);
 
-$k[inline_keyboard][]=[[text=>"• رجوع •",callback_data=>"azrars"]];
-$k1[inline_keyboard][]=[[text=>"• رجوع •",callback_data=>"back1"]];
+$k['inline_keyboard'][]=[['text'=>"• رجوع •",'callback_data'=>"azrars"]];
+$k1['inline_keyboard'][]=[['text'=>"• رجوع •",'callback_data'=>"back1"]];
 
 	
 
@@ -2589,13 +2589,13 @@ if($task_ex){
     $izr_sock[$task_ex] = $t;
     file_put_contents("$izr_name",json_encode($izr_sock));
     $key=[];
-  $key[inline_keyboard][]=[['text'=>"خدمات بوت الرشق 🔰",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"تجميع نقاط 🛍",'callback_data'=>"SALEH"], ['text'=>"احصائياتي 🎾",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"SALEH"], ['text'=>"تحويل $name3mla ♻️",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"SALEH"],['text'=>"طلباتي 🔇",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"التحديثات  ⚙️",'callback_data'=>"SALEH"],['text'=>"الاحصائيات 📊",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"شحن $name3mla ‍💎",'callback_data'=>"SALEH"],['text'=>"الشروط 🗒",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"عدد الطلبات : $bot_tlb 📣",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"خدمات بوت الرشق 🔰",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"تجميع نقاط 🛍",'callback_data'=>"SALEH"], ['text'=>"احصائياتي 🎾",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"SALEH"], ['text'=>"تحويل $name3mla ♻️",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"SALEH"],['text'=>"طلباتي 🔇",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"التحديثات  ⚙️",'callback_data'=>"SALEH"],['text'=>"الاحصائيات 📊",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"شحن $name3mla ‍💎",'callback_data'=>"SALEH"],['text'=>"الشروط 🗒",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"عدد الطلبات : $bot_tlb 📣",'callback_data'=>"SALEH"]];
     $addedIds = [];
 
     foreach ($zr['id'] as $i) {
@@ -2644,13 +2644,13 @@ if($task_ex){
 
 if ($data == "azrars") {
     $key=[];
-  $key[inline_keyboard][]=[['text'=>"خدمات بوت الرشق 🔰",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"تجميع نقاط 🛍",'callback_data'=>"SALEH"], ['text'=>"احصائياتي 🎾",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"SALEH"], ['text'=>"تحويل $name3mla ♻️",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"SALEH"],['text'=>"طلباتي 🔇",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"التحديثات  ⚙️",'callback_data'=>"SALEH"],['text'=>"الاحصائيات 📊",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"شحن $name3mla ‍💎",'callback_data'=>"SALEH"],['text'=>"الشروط 🗒",'callback_data'=>"SALEH"]];
-  $key[inline_keyboard][]=[['text'=>"عدد الطلبات : $bot_tlb 📣",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"خدمات بوت الرشق 🔰",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"تجميع نقاط 🛍",'callback_data'=>"SALEH"], ['text'=>"احصائياتي 🎾",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"SALEH"], ['text'=>"تحويل $name3mla ♻️",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"SALEH"],['text'=>"طلباتي 🔇",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"التحديثات  ⚙️",'callback_data'=>"SALEH"],['text'=>"الاحصائيات 📊",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"شحن $name3mla ‍💎",'callback_data'=>"SALEH"],['text'=>"الشروط 🗒",'callback_data'=>"SALEH"]];
+  $key['inline_keyboard'][]=[['text'=>"عدد الطلبات : $bot_tlb 📣",'callback_data'=>"SALEH"]];
     $addedIds = [];
 
     foreach ($zr['id'] as $i) {
@@ -2707,14 +2707,14 @@ if ($data == "azrars") {
     $name = $zr['infonam'][$i];
     if(preg_match("#http#",$biozr)) {
     	
-    $key[inline_keyboard][]=[[text=>"$name",url=>"edit:$i" ], [text=>"🗑️",callback_data=>"del:$i" ]] ;
+    $key['inline_keyboard'][]=[['text'=>"$name",'url'=>"edit:$i" ], ['text'=>"🗑️",'callback_data'=>"del:$i" ]] ;
    } else {
    	
-   $key[inline_keyboard][]=[[text=>"$name",callback_data=>"edit:$i" ]];
+   $key['inline_keyboard'][]=[['text'=>"$name",'callback_data'=>"edit:$i" ]];
   } 
 }
 
-$key[inline_keyboard][]=[[text=>"+",callback_data=>"newzr"]];
+$key['inline_keyboard'][]=[['text'=>"+",'callback_data'=>"newzr"]];
 $key['inline_keyboard'][] =  [['text'=>'رجوع','callback_data'=>"paneel"]];
 bot('sendMessage',[ 
     'chat_id'=>$chat_id, 
@@ -3037,10 +3037,10 @@ file_put_contents("FCZR/". X_. "/zr.json",$zr);
 }else {
    	$tp = "محتوى نصي" ;
   } 
-  $h[inline_keyboard][]=[[text=>"• تعديل محتوي الزر •",callback_data=>"setmhtea:$id"]];
-    $h[inline_keyboard][]=[[text=>"• طريقه عرض الرساله : $sect •",callback_data=>"sect:$id"]];
-    	$h[inline_keyboard][]=[[text=>"• مسح الزر •",callback_data=>"del:$id"]];
-    $h[inline_keyboard][]=[[text=>"• رجوع •",callback_data=>"azrars"]];
+  $h['inline_keyboard'][]=[['text'=>"• تعديل محتوي الزر •",'callback_data'=>"setmhtea:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• طريقه عرض الرساله : $sect •",'callback_data'=>"sect:$id"]];
+    	$h['inline_keyboard'][]=[['text'=>"• مسح الزر •",'callback_data'=>"del:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• رجوع •",'callback_data'=>"azrars"]];
     bot('editmessagetext',[ 
     'chat_id'=>$chat_id, 
     'message_id'=>$message_id,
@@ -3077,11 +3077,11 @@ file_put_contents("FCZR/". X_. "/zr.json",$zr);
     	$sect = "همسة";
     }
     	$id = explode(":",$data)[1];
-    $h[inline_keyboard][]=[[text=>"• تعديل محتوي الزر •",callback_data=>"setmhtea:$id"]];
-    $h[inline_keyboard][]=[[text=>"• تعديل رسالة •",callback_data=>"editss:$id"]];
-    	$h[inline_keyboard][]=[[text=>"• رساله جديده •",callback_data=>"sendss:$id"]];
-    $h[inline_keyboard][]=[[text=>"• همسة •",callback_data=>"hmsass:$id"]];
-    $h[inline_keyboard][]=[[text=>"• رجوع •",callback_data=>"azrars"]];
+    $h['inline_keyboard'][]=[['text'=>"• تعديل محتوي الزر •",'callback_data'=>"setmhtea:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• تعديل رسالة •",'callback_data'=>"editss:$id"]];
+    	$h['inline_keyboard'][]=[['text'=>"• رساله جديده •",'callback_data'=>"sendss:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• همسة •",'callback_data'=>"hmsass:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• رجوع •",'callback_data'=>"azrars"]];
     $namezr = $zr['infonam'][explode(":",$data)[1]];
     
     $biozr = $zr['infodesc'][explode(":",$data)[1]];
@@ -3113,11 +3113,11 @@ file_put_contents("FCZR/". X_. "/zr.json",$zr);
 	if(explode(":",$data)[0] == "editss"){
 		
     	$id = explode(":",$data)[1];
-    $h[inline_keyboard][]=[[text=>"• تعديل محتوي الزر •",callback_data=>"setmhtea:$id"]];
-    $h[inline_keyboard][]=[[text=>"• تعديل رسالة •",callback_data=>"editss:$id"]];
-    	$h[inline_keyboard][]=[[text=>"• رساله جديده •",callback_data=>"sendss:$id"]];
-    $h[inline_keyboard][]=[[text=>"• همسة •",callback_data=>"hmsass:$id"]];
-    $h[inline_keyboard][]=[[text=>"• رجوع •",callback_data=>"azrars"]];
+    $h['inline_keyboard'][]=[['text'=>"• تعديل محتوي الزر •",'callback_data'=>"setmhtea:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• تعديل رسالة •",'callback_data'=>"editss:$id"]];
+    	$h['inline_keyboard'][]=[['text'=>"• رساله جديده •",'callback_data'=>"sendss:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• همسة •",'callback_data'=>"hmsass:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• رجوع •",'callback_data'=>"azrars"]];
     $namezr = $zr['infonam'][explode(":",$data)[1]];
     
     $biozr = $zr['infodesc'][explode(":",$data)[1]];
@@ -3146,7 +3146,7 @@ file_put_contents("FCZR/". X_. "/zr.json",$zr);
 		
     	$id = explode(":",$data)[1];
    
-    $h[inline_keyboard][]=[[text=>"• رجوع •",callback_data=>"edit:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• رجوع •",'callback_data'=>"edit:$id"]];
     $namezr = $zr['infonam'][explode(":",$data)[1]];
     
     $biozr = $zr['infodesc'][explode(":",$data)[1]];
@@ -3197,11 +3197,11 @@ file_put_contents("FCZR/". X_. "/zr.json",$zr);
 	if(explode(":",$data)[0] == "sendss"){
 		
     	$id = explode(":",$data)[1];
-    $h[inline_keyboard][]=[[text=>"• تعديل محتوي الزر •",callback_data=>"setmhtea:$id"]];
-    $h[inline_keyboard][]=[[text=>"• تعديل رسالة •",callback_data=>"editss:$id"]];
-    	$h[inline_keyboard][]=[[text=>"• رساله جديده •",callback_data=>"sendss:$id"]];
-    $h[inline_keyboard][]=[[text=>"• همسة •",callback_data=>"hmsass:$id"]];
-    $h[inline_keyboard][]=[[text=>"• رجوع •",callback_data=>"azrars"]];
+    $h['inline_keyboard'][]=[['text'=>"• تعديل محتوي الزر •",'callback_data'=>"setmhtea:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• تعديل رسالة •",'callback_data'=>"editss:$id"]];
+    	$h['inline_keyboard'][]=[['text'=>"• رساله جديده •",'callback_data'=>"sendss:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• همسة •",'callback_data'=>"hmsass:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• رجوع •",'callback_data'=>"azrars"]];
     $namezr = $zr['infonam'][explode(":",$data)[1]];
     
     $biozr = $zr['infodesc'][explode(":",$data)[1]];
@@ -3229,11 +3229,11 @@ file_put_contents("FCZR/". X_. "/zr.json",$zr);
 	if(explode(":",$data)[0] == "hmsass"){
 		
     	$id = explode(":",$data)[1];
-    $h[inline_keyboard][]=[[text=>"• تعديل محتوي الزر •",callback_data=>"setmhtea:$id"]];
-    $h[inline_keyboard][]=[[text=>"• تعديل رسالة •",callback_data=>"editss:$id"]];
-    	$h[inline_keyboard][]=[[text=>"• رساله جديده •",callback_data=>"sendss:$id"]];
-    $h[inline_keyboard][]=[[text=>"• همسة •",callback_data=>"hmsass:$id"]];
-    $h[inline_keyboard][]=[[text=>"• رجوع •",callback_data=>"azrars"]];
+    $h['inline_keyboard'][]=[['text'=>"• تعديل محتوي الزر •",'callback_data'=>"setmhtea:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• تعديل رسالة •",'callback_data'=>"editss:$id"]];
+    	$h['inline_keyboard'][]=[['text'=>"• رساله جديده •",'callback_data'=>"sendss:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• همسة •",'callback_data'=>"hmsass:$id"]];
+    $h['inline_keyboard'][]=[['text'=>"• رجوع •",'callback_data'=>"azrars"]];
     $namezr = $zr['infonam'][explode(":",$data)[1]];
     
     $biozr = $zr['infodesc'][explode(":",$data)[1]];
@@ -4192,7 +4192,7 @@ if(explode(":",$data)[0] == "enter"){
     
     
     
-    $k15[inline_keyboard][]=[[text=>"• رجوع •",callback_data=>"tobot"]];
+    $k15['inline_keyboard'][]=[['text'=>"• رجوع •",'callback_data'=>"tobot"]];
     bot($fic,[ 
     'chat_id'=>$chat_id, 
     'message_id'=>$message_id,
@@ -4207,13 +4207,13 @@ if(explode(":",$data)[0] == "enter"){
 	
 	$key=[];
 
-  $key[inline_keyboard][]=[['text'=>"خدمات بوت الرشق 🔰",'callback_data'=>"service"]];
-  $key[inline_keyboard][]=[['text'=>"تجميع نقاط 🛍",'callback_data'=>"plus"], ['text'=>"احصائياتي 🎾",'callback_data'=>"acc"]];
-  $key[inline_keyboard][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"hdia"], ['text'=>"تحويل $name3mla ♻️",'callback_data'=>"transer"]];
-  $key[inline_keyboard][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"infotlb"],['text'=>"طلباتي 🔇",'callback_data'=>"myrders"]];
-  $key[inline_keyboard][]=[['text'=>"التحديثات  ⚙️",'url'=>"$chabot.t.me"],['text'=>"الاحصائيات 📊",'callback_data'=>"Namero"]];
-  $key[inline_keyboard][]=[['text'=>"شحن $name3mla ‍💎",'callback_data'=>"buy"],['text'=>"الشروط 🗒",'callback_data'=>"termss"]];
-  $key[inline_keyboard][]=[['text'=>"عدد الطلبات : $bot_tlb 📣",'callback_data'=>"jj"]];
+  $key['inline_keyboard'][]=[['text'=>"خدمات بوت الرشق 🔰",'callback_data'=>"service"]];
+  $key['inline_keyboard'][]=[['text'=>"تجميع نقاط 🛍",'callback_data'=>"plus"], ['text'=>"احصائياتي 🎾",'callback_data'=>"acc"]];
+  $key['inline_keyboard'][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"hdia"], ['text'=>"تحويل $name3mla ♻️",'callback_data'=>"transer"]];
+  $key['inline_keyboard'][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"infotlb"],['text'=>"طلباتي 🔇",'callback_data'=>"myrders"]];
+  $key['inline_keyboard'][]=[['text'=>"التحديثات  ⚙️",'url'=>"$chabot.t.me"],['text'=>"الاحصائيات 📊",'callback_data'=>"Namero"]];
+  $key['inline_keyboard'][]=[['text'=>"شحن $name3mla ‍💎",'callback_data'=>"buy"],['text'=>"الشروط 🗒",'callback_data'=>"termss"]];
+  $key['inline_keyboard'][]=[['text'=>"عدد الطلبات : $bot_tlb 📣",'callback_data'=>"jj"]];
   $fuck = array(); 
 
   foreach ($zr['id'] as $i) {
@@ -4222,15 +4222,15 @@ if(explode(":",$data)[0] == "enter"){
       $is_u = $zr['is_i'][$i];
   
       if (preg_match("#http#", $biozr)) {
-          $key[inline_keyboard][] = [[text => "$name", url => $biozr]];
+          $key['inline_keyboard'][] = [[text => "$name", url => $biozr]];
       } elseif ($is_u == true) {
           if (!isset($fuck[$i])) {
-              $key[inline_keyboard][] = [[text => "$name", callback_data => "$i"]];
+              $key['inline_keyboard'][] = [[text => "$name", callback_data => "$i"]];
               $fuck[$i] = "o"; 
           }
       } else {
           if (!isset($fuck[$i])) {
-              $key[inline_keyboard][] = [[text => "$name", callback_data => "enter:$i"]];
+              $key['inline_keyboard'][] = [[text => "$name", callback_data => "enter:$i"]];
               $fuck[$i] = "o"; 
           }
       }
