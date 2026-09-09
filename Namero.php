@@ -4761,13 +4761,13 @@ $min = $api[$i]->min ;
 $mix = $api[$i]->max ;
 $category = $api[$i]->category ;
     if($namem) {
-      $keytr[inline_keyboard][]=[['text'=>"$namem",'callback_data'=>"servicem|$id|$UUS[1]"]];
+      $keytr['inline_keyboard'][]=[['text'=>"$namem",'callback_data'=>"servicem|$id|$UUS[1]"]];
       $tym[$id]="$namem|$mix|$min|$id|$s3r";
       file_put_contents('time_back/'.$chat_id.'_'.USR_BOT,json_encode($tym));
     }
     }
-    $keytr[inline_keyboard][]=[['text'=>"▶️ التالي",'callback_data'=>"cnc|2|$UUS[1]"]];
-    $keytr[inline_keyboard][]=[['text'=>"رجوع",'callback_data'=>"addauto|$UUS[1]"]];
+    $keytr['inline_keyboard'][]=[['text'=>"▶️ التالي",'callback_data'=>"cnc|2|$UUS[1]"]];
+    $keytr['inline_keyboard'][]=[['text'=>"رجوع",'callback_data'=>"addauto|$UUS[1]"]];
 
     bot('EditMessageText', [
       'chat_id' => $chat_id,
@@ -6937,7 +6937,7 @@ if(explode(":",$data)[0] == "enter"){
     
     
     
-    $k15[inline_keyboard][]=[[text=>"• رجوع •",callback_data=>"tobot"]];
+    $k15['inline_keyboard'][]=[['text'=>"• رجوع •",'callback_data'=>"tobot"]];
     bot($fic,[ 
     'chat_id'=>$chat_id, 
     'message_id'=>$message_id,
@@ -6955,18 +6955,18 @@ if(explode(":",$data)[0] == "enter"){
   if($izr_sock['mode'] == "✅"){
 	$key=[];
   $addedIds = [];
-  //$key[inline_keyboard][]=[['text'=>"خدمات بوت الرشق 🔰",'callback_data'=>"service"]];
-  $key[inline_keyboard][]=[['text'=>"الخدمات 🛍️ ",'callback_data'=>"joo"]];
-  $key[inline_keyboard][]=[['text'=>"تجميع النقاط ❇️",'callback_data'=>"plus"], ['text'=>"اعدادات الحساب ⚙️",'callback_data'=>"account_settings"]];
-  $key[inline_keyboard][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"hdia"], ['text'=>"تحويل $name3mla ♻️",'callback_data'=>"transer"]];
-  $key[inline_keyboard][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"infotlb"],['text'=>" الطلبات 📮",'callback_data'=>"myrders"]];
-  $key[inline_keyboard][]=[['text'=>"التحديثات  ⚙️",'url'=>"$chabot.t.me"],['text'=>"الاحصائيات 📊",'callback_data'=>"Namero"]];
-  $key[inline_keyboard][]=[['text'=>"شراء $name3mla 💰",'callback_data'=>"buy"],['text'=>"الشروط 🗒",'callback_data'=>"termss"]];
-  $key[inline_keyboard][]=[['text'=>"عدد الطلبات : $bot_tlb ✅",'callback_data'=>"jj"]];
+  //$key['inline_keyboard'][]=[['text'=>"خدمات بوت الرشق 🔰",'callback_data'=>"service"]];
+  $key['inline_keyboard'][]=[['text'=>"الخدمات 🛍️ ",'callback_data'=>"joo"]];
+  $key['inline_keyboard'][]=[['text'=>"تجميع النقاط ❇️",'callback_data'=>"plus"], ['text'=>"اعدادات الحساب ⚙️",'callback_data'=>"account_settings"]];
+  $key['inline_keyboard'][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"hdia"], ['text'=>"تحويل $name3mla ♻️",'callback_data'=>"transer"]];
+  $key['inline_keyboard'][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"infotlb"],['text'=>" الطلبات 📮",'callback_data'=>"myrders"]];
+  $key['inline_keyboard'][]=[['text'=>"التحديثات  ⚙️",'url'=>"$chabot.t.me"],['text'=>"الاحصائيات 📊",'callback_data'=>"Namero"]];
+  $key['inline_keyboard'][]=[['text'=>"شراء $name3mla 💰",'callback_data'=>"buy"],['text'=>"الشروط 🗒",'callback_data'=>"termss"]];
+  $key['inline_keyboard'][]=[['text'=>"عدد الطلبات : $bot_tlb ✅",'callback_data'=>"jj"]];
    
   }else{
     $key=[];
-    $key[inline_keyboard][]=[['text'=>"",'callback_data'=>"jj"]];
+    $key['inline_keyboard'][]=[['text'=>"",'callback_data'=>"jj"]];
   }
     foreach ($zr['id'] as $i){
     $namem = $zr['infonam'][$i];
@@ -6975,13 +6975,13 @@ if(explode(":",$data)[0] == "enter"){
       $addedIds[] = $i;
     if(preg_match("#http#",$biozr)) {
     	
-    $key[inline_keyboard][]=[[text=>"$namem",url=>$biozr]];
+    $key['inline_keyboard'][]=[['text'=>"$namem",'url'=>$biozr]];
 
    } elseif(preg_match("/SALEH:/",$biozr)) {
     $decv = base64_decode(explode('SALEH:',$biozr)[1]);
-    $key[inline_keyboard][]=[[text=>"$namem",callback_data=>"$decv" ]];
+    $key['inline_keyboard'][]=[['text'=>"$namem",'callback_data'=>"$decv" ]];
    }else{
-   $key[inline_keyboard][]=[[text=>"$namem",callback_data=>"enter:$i" ]];
+   $key['inline_keyboard'][]=[['text'=>"$namem",'callback_data'=>"enter:$i" ]];
   } 
   
 }
