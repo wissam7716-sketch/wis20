@@ -7651,19 +7651,65 @@ bot('EditMessageText',[
 
 
 if($data == "tobot") {
-bot('EditMessageText',[
-'chat_id'=>$chat_id,
-'message_id'=>$message_id,
-'text'=>"
-$starts
-",
-'parse_mode'=>"markdown",
-'reply_markup'=>json_encode($RSALEHO)
-]);
-$modes['mode'][$from_id] = null ;
-SETJSON($rshq) ;
-return false ;
-} 
+    // 1. بناء أزرار لوحة الأعضاء 
+    $user_key = [];
+    $user_key['inline_keyboard'][]=[['text'=>"الخدمات الرئيسيه 🛍️",'callback_data'=>"service"]];
+    if (($rshq['ads']['status'] ?? 'off') == 'on') {
+        $user_key['inline_keyboard'][] = [['text'=>"خدمات الإعلانات 📢",'callback_data'=>"post_ad_start" ]];
+    }
+    if(isset($rshq['FREE']) && $rshq['FREE'] == "TR") { 
+        $user_key['inline_keyboard'][] = [['text'=>"تمويل قناتك او مجموعه 👥",'callback_data'=>"tmoile" ]];
+    }
+    $user_key['inline_keyboard'][]=[['text'=>"تجميع نقاط 🛍",'callback_data'=>"plus"], ['text'=>"اعدادات الحساب ⚙️",'callback_data'=>"account_settings"]];
+    $user_key['inline_keyboard'][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"hdia"], ['text'=>"تحويل ".$rshq["name3mla"]." ♻️",'callback_data'=>"transer"]];
+    $user_key['inline_keyboard'][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"infotlb"],['text'=>"طلباتي 🔇",'callback_data'=>"myrders"]];
+    $user_key['inline_keyboard'][]=[['text'=>"التحديثات  ⚙️",'url'=>"https://t.me/".str_replace('@','',$rshq['cha']??"")] ,['text'=>"الاحصائيات 📊",'callback_data'=>"Namero"]];
+    $user_key['inline_keyboard'][]=[['text'=>"شراء ".$rshq["name3mla"]." ‍💎",'callback_data'=>"buy"],['text'=>"الشروط 🗒",'callback_data'=>"termss"]];
+    $user_key['inline_keyboard'][]=[['text'=>"عدد الطلبات : ".$bot_tlb." 📣",'callback_data'=>"jj"]];
+
+    // جلب الأزرار الشفافة الإضافية
+    $zr_data = json_decode(@file_get_contents("FCZR/". X_ . "/zr.json"), true);
+    if(isset($zr_data['id']) && is_array($zr_data['id'])){
+        $addedIds_user = [];
+        foreach ($zr_data['id'] as $i) {
+            $name_btn = $zr_data['infonam'][$i];
+            $biozr_btn = $zr_data['infodesc'][$i];
+            $is_u_btn = $zr_data['is_i'][$i] ?? false;
+            if (preg_match("#http#", $biozr_btn)) {
+                $user_key['inline_keyboard'][] = [['text' => "$name_btn", 'url' => $biozr_btn]];
+            } elseif ($is_u_btn == true) {
+                if (!isset($addedIds_user[$i])) {
+                    $user_key['inline_keyboard'][] = [['text' => "$name_btn", 'callback_data' => "$i"]];
+                    $addedIds_user[$i] = true;
+                }
+            } else {
+                if (!isset($addedIds_user[$i])) {
+                    $user_key['inline_keyboard'][] = [['text' => "$name_btn", 'callback_data' => "enter:$i"]];
+                    $addedIds_user[$i] = true;
+                }
+            }
+        }
+    }
+
+    $user_me_text = $username ?? "لايوجد";
+    if($user_me_text !== "لايوجد") $user_me_text = "@$user_me_text";
+    $final_start_msg = str_replace(
+        ['#name_user', '#username', '#name', '#coins', '#tlbs', '#shares', '#xtlb', 'نقاط', '#id'],
+        ["[$name](tg://user?id=$from_id)", $user_me_text, $name, $rshq["coin"][$from_id]??"0", $rshq['bot_tlb'] ?? "0", $rshq["mshark"][$from_id] ?? "0", $rshq["tlby"][$from_id] ?? "0", $rshq["name3mla"] ?? "نقاط", $from_id],
+        $start_msg ?? "مرحبا بك في البوت"
+    );
+
+    bot('EditMessageText',[
+        'chat_id'=>$chat_id,
+        'message_id'=>$message_id,
+        'text'=> $final_start_msg,
+        'parse_mode'=>"markdown",
+        'reply_markup'=>json_encode($user_key)
+    ]);
+    $modes['mode'][$from_id] = null ;
+    SETJSON($rshq) ;
+    return false ;
+}
 
 $rshq = json_decode(file_get_contents("RSHQ/ALLS/". USR_BOT."/rshq.json"),true);
 if($data == "hdia") {
