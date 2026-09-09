@@ -14,6 +14,7 @@ $update = json_decode($content, true);
 // تم تصحيح اخطاء الملف بواسطه كيلوا@X_V_44 @ka7h_bot
 $API_KEY = "8177219985:AAHii1xWe9tz3s-nHwfO5_7nUn8IgjnmfC4";
 
+
 #حط ايديك سطر 7 وسطر 5119 بس 
 $sudo = 7328300457; // ايدي الادمن
 // ==========================================
@@ -7523,26 +7524,81 @@ $starts
 
 
  
- if($text == "/start"){
-  if($hHSALEH != "I"){
-  if($start_sock['mode'] == "✅"){
-bot("sendmessage",[
-  'chat_id' => $chat_id,
-  'text' => $start_msg,
-  'parse_mode' => 'MaRKDOWN',
-  'reply_to_message_id' => $message_id,
-  "reply_markup" => json_encode($key),
-]);
-  }else{
-      bot("sendmessage",[
-          'chat_id' => $chat_id,
-          'text' => $start_msgmm,
-          'parse_mode' => 'MaRKDOWN',
-          "reply_markup" => json_encode($key),
-      ]);
-  }
+if($text == "/start" && $chat_id != $sudo && !in_array($chat_id, $admins)){
+    if($hHSALEH != "I"){
+        
+        // 1. بناء أزرار لوحة الأعضاء لكي لا تكون فارغة
+        $user_key = [];
+        $user_key['inline_keyboard'][]=[['text'=>"الخدمات الرئيسيه 🛍️",'callback_data'=>"service"]];
+        
+        if (($rshq['ads']['status'] ?? 'off') == 'on') {
+            $user_key['inline_keyboard'][] = [['text'=>"خدمات الإعلانات 📢",'callback_data'=>"post_ad_start" ]];
+        }
+        if(isset($rshq['FREE']) && $rshq['FREE'] == "TR") { 
+            $user_key['inline_keyboard'][] = [['text'=>"تمويل قناتك او مجموعه 👥",'callback_data'=>"tmoile" ]];
+        }
+        
+        $user_key['inline_keyboard'][]=[['text'=>"تجميع نقاط 🛍",'callback_data'=>"plus"], ['text'=>"اعدادات الحساب ⚙️",'callback_data'=>"account_settings"]];
+        $user_key['inline_keyboard'][]=[['text'=>"استخدام كود 🪪",'callback_data'=>"hdia"], ['text'=>"تحويل ".$rshq["name3mla"]." ♻️",'callback_data'=>"transer"]];
+        $user_key['inline_keyboard'][]=[['text'=>"معلومات الطلب 🌐",'callback_data'=>"infotlb"],['text'=>"طلباتي 🔇",'callback_data'=>"myrders"]];
+        $user_key['inline_keyboard'][]=[['text'=>"التحديثات  ⚙️",'url'=>"https://t.me/".str_replace('@','',$rshq['cha']??"")] ,['text'=>"الاحصائيات 📊",'callback_data'=>"Namero"]];
+        $user_key['inline_keyboard'][]=[['text'=>"شراء ".$rshq["name3mla"]." ‍💎",'callback_data'=>"buy"],['text'=>"الشروط 🗒",'callback_data'=>"termss"]];
+        $user_key['inline_keyboard'][]=[['text'=>"عدد الطلبات : ".$bot_tlb." 📣",'callback_data'=>"jj"]];
+
+        // جلب الأزرار الشفافة الإضافية (إن وجدت)
+        $zr_data = json_decode(@file_get_contents("FCZR/". X_ . "/zr.json"), true);
+        if(isset($zr_data['id']) && is_array($zr_data['id'])){
+            $addedIds_user = [];
+            foreach ($zr_data['id'] as $i) {
+                $name_btn = $zr_data['infonam'][$i];
+                $biozr_btn = $zr_data['infodesc'][$i];
+                $is_u_btn = $zr_data['is_i'][$i] ?? false;
+
+                if (preg_match("#http#", $biozr_btn)) {
+                    $user_key['inline_keyboard'][] = [['text' => "$name_btn", 'url' => $biozr_btn]];
+                } elseif ($is_u_btn == true) {
+                    if (!isset($addedIds_user[$i])) {
+                        $user_key['inline_keyboard'][] = [['text' => "$name_btn", 'callback_data' => "$i"]];
+                        $addedIds_user[$i] = true;
+                    }
+                } else {
+                    if (!isset($addedIds_user[$i])) {
+                        $user_key['inline_keyboard'][] = [['text' => "$name_btn", 'callback_data' => "enter:$i"]];
+                        $addedIds_user[$i] = true;
+                    }
+                }
+            }
+        }
+
+        // 2. تعويض الكليشة بالمعلومات (مثل عدد النقاط واسم العضو)
+        $user_me_text = $update->message->from->username ?? "لايوجد";
+        if($user_me_text !== "لايوجد") $user_me_text = "@$user_me_text";
+
+        $final_start_msg = str_replace(
+            ['#name_user', '#username', '#name', '#coins', '#tlbs', '#shares', '#xtlb', 'نقاط', '#id'],
+            ["[$name](tg://user?id=$from_id)", $user_me_text, $name, $rshq["coin"][$from_id]??"0", $rshq['bot_tlb'] ?? "0", $rshq["mshark"][$from_id] ?? "0", $rshq["tlby"][$from_id] ?? "0", $rshq["name3mla"] ?? "نقاط", $from_id],
+            $start_msg ?? "مرحبا بك في البوت"
+        );
+
+        // 3. إرسال الرسالة النهائية
+        if($start_sock['mode'] == "✅"){
+            bot("sendmessage",[
+                'chat_id' => $chat_id,
+                'text' => $final_start_msg,
+                'parse_mode' => 'MaRKDOWN',
+                'reply_to_message_id' => $message_id,
+                "reply_markup" => json_encode($user_key), // هنا الأزرار تم بناؤها ولن تكون فارغة
+            ]);
+        }else{
+            bot("sendmessage",[
+                'chat_id' => $chat_id,
+                'text' => $start_msgmm ?? "عذراً، البوت تحت الصيانة حالياً 🛠️",
+                'parse_mode' => 'MaRKDOWN',
+                "reply_markup" => json_encode($user_key),
+            ]);
+        }
+    }
 }
- }
  
  if($data == "buy") {
    if( $rshq['buy'] == null){
