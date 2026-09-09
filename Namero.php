@@ -1,4 +1,5 @@
 <?php
+http_response_code(200);
 
 // تم تصحيح اخطاء الملف بواسطه كيلوا@X_V_44 @ka7h_bot
 $API_KEY = "8177219985:AAHii1xWe9tz3s-nHwfO5_7nUn8IgjnmfC4" ;
