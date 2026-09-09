@@ -1,5 +1,12 @@
 <?php
+// استقبال طلب تليجرام وفك تشفيره دون إحداث أخطاء
+$content = file_get_contents("php://input");
+$update = json_decode($content, true);
+
+// إرسال رد فارغ صحيح وصريح لمنصة تليجرام لتجنب خطأ 502
 http_response_code(200);
+header('Content-Type: application/json');
+echo json_encode(["status" => "ok"]);
 
 // تم تصحيح اخطاء الملف بواسطه كيلوا@X_V_44 @ka7h_bot
 $API_KEY = "8177219985:AAHii1xWe9tz3s-nHwfO5_7nUn8IgjnmfC4" ;
