@@ -73,17 +73,31 @@ function bot($method, $datas=[]){
 }
 
 $usrbot = bot("getme")->result->username;
-define("USR_BOT",$usrbot); #يابه لحد يلعب بهاذه
-$emoji = 
-"
-" ;
-$emoji = explode ("\n", $emoji) ;
-$b = $emoji[rand(0,4)];
-$NamesBACK = "رجوع ♾️" ;
-$rshq = json_decode(file_get_contents("RSHQ/ALLS/". USR_BOT. "/rshq.json"),true);
-$modes = json_decode(file_get_contents("RSHQ/ALLS/". USR_BOT. "/modes.json"),true);
-include("Namero1.php") ;
-mkdir("RSHQ/ALLS") ;
+define("USR_BOT", $usrbot); 
+
+// إصلاح مشكلة الإيموجي العشوائي
+$emoji = "➡️\n🎟️\n↪️\n🔘\n🏠";
+$emoji_arr = explode("\n", $emoji);
+$b = $emoji_arr[array_rand($emoji_arr)];
+$NamesBACK = "رجوع ♾️";
+
+// إنشاء المجلدات أولاً لتجنب خطأ المسار
+@mkdir("RSHQ");
+@mkdir("RSHQ/ALLS");
+@mkdir("RSHQ/ALLS/". USR_BOT);
+
+// إنشاء الملفات إذا لم تكن موجودة لتجنب تحذير القراءة
+$rshq_file = "RSHQ/ALLS/". USR_BOT. "/rshq.json";
+$modes_file = "RSHQ/ALLS/". USR_BOT. "/modes.json";
+
+if(!file_exists($rshq_file)) { @file_put_contents($rshq_file, json_encode([])); }
+if(!file_exists($modes_file)) { @file_put_contents($modes_file, json_encode([])); }
+
+// قراءة الملفات بطريقة آمنة
+$rshq = json_decode(@file_get_contents($rshq_file), true) ?: [];
+$modes = json_decode(@file_get_contents($modes_file), true) ?: [];
+
+@include("Namero1.php");
 function SETJSON($INPUT){
     if ($INPUT !== null && $INPUT !== "") {
         $file_path = "RSHQ/ALLS/" . USR_BOT . "/rshq.json";
