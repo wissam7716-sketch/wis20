@@ -1,5 +1,22 @@
-FROM php:8.2-cli
-COPY . /app
-WORKDIR /app
+FROM php:8.2-fpm
+RUN apt-get update && apt-get install -y nginx && rm -rf /var/lib/apt/lists/*
+
+COPY . /var/www/html
+WORKDIR /var/www/html
+
+RUN echo 'server { \
+    listen 8080; \
+    root /var/www/html; \
+    index Namero.php index.php index.html; \
+    location / { \
+        try_files $uri $uri/ /Namero.php?$query_string; \
+    } \
+    location ~ \.php$ { \
+        include fastcgi_params; \
+        fastcgi_pass 127.0.0.1:9000; \
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; \
+    } \
+}' > /etc/nginx/sites-available/default
+
 EXPOSE 8080
-CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-8080} Namero.php"]
+CMD service nginx start && php-fpm
