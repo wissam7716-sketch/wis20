@@ -8219,21 +8219,18 @@ if($data == "play_wheel_game") {
 }
 
 
+$ok = "";
 if(isset($rshq['trend']) && $rshq['trend'] != "x"){
     $saleh_path = "RSHQ/ALLS/".USR_BOT."/SALEH.json";
     $SALEH = file_exists($saleh_path) ? json_decode(file_get_contents($saleh_path),1) : [];
     
-    // التأكد من أن البيانات موجودة وأنها مصفوفة فعلاً قبل الترتيب
     if(isset($SALEH['SALEH']['send']['add']) && is_array($SALEH['SALEH']['send']['add']) && !empty($SALEH['SALEH']['send']['add'])){
         $f = $SALEH['SALEH']['send']['add'];
         rsort($f);
         
-        $limit = min(5, count($f)); // لتجنب الأخطاء إذا كان عدد المشتركين أقل من 5
+        $limit = min(5, count($f)); 
         for($i=0; $i<$limit; $i++){
-            $dets = json_decode(@file_get_contents("http://api.telegram.org/bot".API_KEY."/getChat?chat_id=".$f[$i]));
-            $name = $dets->result->title ?? "مستخدم";
-            
-            if($f[$i] != null){
+            if(isset($f[$i]) && $f[$i] != null){
                 $V = array_search($f[$i],$SALEH['SALEH']['send']['add']);
                 $uS = $SALEH['SALEH']['send']['uname'][$V];
                 $u=$i+1;
@@ -8244,52 +8241,13 @@ if(isset($rshq['trend']) && $rshq['trend'] != "x"){
 
                 $dh = json_decode(@file_get_contents("http://api.telegram.org/bot".API_KEY."/getChat?chat_id=".$uS));
                 $fk = $dh->result->title ?? $uS;
-                $ok = ($ok ?? "") . " $u ★ *$f[$i]* -> [$fk](tg://user?id=$uS) \n";
+                $ok .= " $u ★ *$f[$i]* -> [$fk](tg://user?id=$uS) \n";
             }
         }
     }
-}
-$dets = json_decode(file_get_contents("http://api.telegram.org/bot$token/getChat?chat_id=$f[$i]"));
-$name =$dets->result->title;
-if($f[$i] != null){
-$V = array_search($f[$i],$SALEH['SALEH']['send']['add']);
-$uS = $SALEH['SALEH']['send']['uname'][$V];
-$u=$i+1;
-
-$Numbers = array(
-'1' ,
-'2' ,
-'3',
-'4' ,
-'5', 
-
-
-);
-$NumbersBe = array('🥇' ,
-'🥈' ,
-'🥉' , 
-'🏅' , 
-'🏅' , 
-
-);
-
-$u = str_replace($Numbers,$NumbersBe,$u);
-
-$dh=bot("getchat",['chat_id'=>$uS])->result->title;
-if($dh != null) {
-  $fk = $dh;
-  } 
-  if($dh == null) {
-    $fk = $uS;
-    } 
-$ok = $ok. " $u ★ *$f[$i]* -> [$fk](tg://user?id=$uS) \n";
-}
-}
-}
-if($rshq['trend'] != "x"){
-$b="🛡] المستخدمين الاكثر مشاركة للرابط : \n$ok" ;
-}else{
-  $b = null;
+    $b = "🛡] المستخدمين الاكثر مشاركة للرابط : \n$ok";
+} else {
+    $b = null;
 }
 
 // تم تصحيح اخطاء الملف بواسطه كيلوا@X_V_44 @ka7h_bot
