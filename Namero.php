@@ -1,18 +1,18 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-// استقبال طلب تليجرام وفك تشفيره دون إحداث أخطاء
-$content = file_get_contents("php://input");
-$update = json_decode($content, true);
+ini_set('display_errors', '0');
 
-// إرسال رد فارغ صحيح وصريح لمنصة تليجرام لتجنب خطأ 502
+// إرسال رد فوري لتليجرام لمنع حدوث 502 Bad Gateway
 http_response_code(200);
 header('Content-Type: application/json');
 echo json_encode(["status" => "ok"]);
 
+// استقبال طلب تليجرام وفك تشفيره دون إحداث أخطاء
+$content = file_get_contents("php://input");
+$update = json_decode($content, true);
+
 // تم تصحيح اخطاء الملف بواسطه كيلوا@X_V_44 @ka7h_bot
-$API_KEY = "8177219985:AAHii1xWe9tz3s-nHwfO5_7nUn8IgjnmfC4" ;
+$API_KEY = "8177219985:AAHii1xWe9tz3s-nHwfO5_7nUn8IgjnmfC4";
 
 #حط ايديك سطر 7 وسطر 5119 بس 
 $sudo = 7328300457; // ايدي الادمن
