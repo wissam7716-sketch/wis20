@@ -170,7 +170,7 @@ if(!file_exists("$fords_name")){
     file_put_contents("$fords_name",json_encode($fords));
 }
 
-$count_eners = count($enters["mems"][$bot_enter["link"]]);
+$count_eners = isset($enters["mems"][$bot_enter["link"]]) && is_array($enters["mems"][$bot_enter["link"]]) ? count($enters["mems"][$bot_enter["link"]]) : 0;
 $start_msg = $start_sock["msg"];
 if($start_msg == null){
 $start_msg = $config['start_msg'];
