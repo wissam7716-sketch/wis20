@@ -4049,8 +4049,9 @@ if($data == "dummy_status"){
 if($rdod['stat'] == "✅"){
 $keyword = $text;
 
-if ($rdod) {
+if ($rdod && isset($keyword) && $keyword !== "") {
     foreach ($rdod["msg"] as $index => $msg) {
+        $msg = $msg ?? ""; // تأمين ضد القيم الفارغة
         if (strpos($msg, $keyword) !== false) {
             $r = $rdod["msg"][$index];
             $b = $rdod["setting"][$r]["preg"];
@@ -4217,10 +4218,11 @@ if(explode(":",$data)[0] == "enter"){
   $key['inline_keyboard'][]=[['text'=>"عدد الطلبات : $bot_tlb 📣",'callback_data'=>"jj"]];
   $fuck = array(); 
 
-  foreach ($zr['id'] as $i) {
-      $name = $zr['infonam'][$i];
-      $biozr = $zr['infodesc'][$i];
-      $is_u = $zr['is_i'][$i];
+  $zr_id_list = (isset($zr['id']) && is_array($zr['id'])) ? $zr['id'] : [];
+  foreach ($zr_id_list as $i) {
+      $name = $zr['infonam'][$i] ?? "زر";
+      $biozr = $zr['infodesc'][$i] ?? "";
+      $is_u = $zr['is_i'][$i] ?? false;
   
       if (preg_match("#http#", $biozr)) {
           $key['inline_keyboard'][] = [['text' => "$name", 'url' => $biozr]];
