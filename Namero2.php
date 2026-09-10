@@ -159,7 +159,8 @@ $message_id = $message->message_id ?? null;
 $username = $message->from->username ?? null;
 $chat_id = $message->chat->id ?? null;
 $title = $message->chat->title ?? null;
-$text = $message->text ?? null;
+$text = $message->text ?? "";
+$data = $update->callback_query->data ?? "";
 $username = $message->from->username ?? null;
 $name = $message->from->first_name ?? null;
 $from_id = $message->from->id ?? null;
@@ -561,6 +562,7 @@ $s
 #==============================#
 
 #كود اضافة التالي#
+$data = $data ?? "";
 $ex = explode("|", $data);
 
 if($data == 'wakel'){
@@ -692,7 +694,7 @@ unset($asiacell['asiacell']["set"]);
 file_put_contents("Asiacell/".USR_BOT."/asiacell.json",json_encode($asiacell,128|32|256));
 }
 }
-if(strlen($text) == 6){
+if(isset($text) && strlen($text) == 6){
 if($text && is_numeric($text)){
 if($asiacell['asiacell']['set'] == "6Code"){
 $arrayinfo = smsvalidation($asiacell['asiacell']["Cookie"],$asiacell['asiacell']["DeviceID"],$asiacell['asiacell']["PID"],$text);
@@ -1180,7 +1182,7 @@ bot('sendmessage',[
 ]);
 }
 }
-if(strlen($text) == 6){
+if(isset($text) && strlen($text) == 6){
 if($text && is_numeric($text)){
 if($Transfer['Transfer'][$from_id]["set"] == "Transfer6Code"){
 $arrayinfo = smsvalidation($Transfer['Transfer'][$from_id]["Cookie"],$Transfer['Transfer'][$from_id]["DeviceID"],$Transfer['Transfer'][$from_id]["PID"],$text);
@@ -1565,7 +1567,7 @@ bot('editmessagetext',[
 $Set['Set'][$from_id] = "Charge";
 file_put_contents("Asiacell/".USR_BOT."/Set.json",json_encode($Set,128|32|256));
 }
-if(strlen($text) >= 13 and $Set['Set'][$from_id] == "Charge"){
+if(isset($text) && strlen($text) >= 13 and $Set['Set'][$from_id] == "Charge"){
 if($text && is_numeric($text)){
 if($Set['Set'][$from_id] == "Charge"){
 $Msg = bot('sendmessage',[
