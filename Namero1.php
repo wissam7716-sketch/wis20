@@ -62,7 +62,8 @@ define("X_",bot('getme')->result->username);
 $update = json_decode(file_get_contents($config['type_up']));
 
 if($update->callback_query ){
-$data = $update->callback_query->data;
+$text = $message->text ?? "";
+$data = $update->callback_query->data ?? "";
 $chat_id = $update->callback_query->message->chat->id;
 $title = $update->callback_query->message->chat->title;
 $message_id = $update->callback_query->message->message_id;
@@ -3904,8 +3905,7 @@ if ($from_id != $admin && !in_array($from_id, $admins)) {
         foreach ($channels_to_check as $channel_id) {
             try {
                 $join_status = bot('getChatMember', ['chat_id' => $channel_id, 'user_id' => $from_id]);
-                $status = $join_status->result->status ?? 'left';
-
+                $status = isset($join_status->result->status) ? $join_status->result->status : 'left';
                 if ($status == 'left' || $status == 'kicked') {
                     $unsubscribed_channels[] = $channel_id; 
                 }
@@ -3987,7 +3987,7 @@ if($data == "check_sub"){
         $is_subscribed = false;
         try {
             $join_status = bot('getChatMember', ['chat_id' => $channel_id, 'user_id' => $from_id]);
-            $status = $join_status->result->status ?? 'left';
+            $status = isset($join_status->result->status) ? $join_status->result->status : 'left';
             if ($status != 'left' && $status != 'kicked') {
                 $is_subscribed = true;
             }
@@ -4237,15 +4237,6 @@ if(explode(":",$data)[0] == "enter"){
   }
   $ai = json_decode(file_get_contents("ai"),1);
 
-  if($data == "tobot"){
-    bot("editmessagetext",[
-        'chat_id' => $chat_id,
-        'message_id' => $message_id,
-        'text' => $start_msg,
-        'parse_mode' => 'MaRKDOWN',
-        "reply_markup" => json_encode($key),
-    ]);
-  }
   $user_me = $update->message->from->username;
 
 if ($user_me === null) {
