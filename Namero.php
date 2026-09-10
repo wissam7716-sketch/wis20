@@ -1395,7 +1395,7 @@ $text = $text ?? "";
 $e=explode("|", $data) ;
 $e1=str_replace("/start","",$text);
 $rshq = json_decode(file_get_contents("RSHQ/ALLS/". USR_BOT. "/rshq.json"),true);
-if($text == "/start$e1" and is_numeric($e1) and !preg_match($text,"#SALEH#")) {
+if($text == "/start$e1" and is_numeric($e1) and !preg_match("#SALEH#", $text)) {
   $rshq['HACKER'][$from_id] = "I";
   $rshq['HACK'][$from_id] = str_replace(" ", null, $e1);
   SETJSON($rshq);
@@ -7327,7 +7327,7 @@ if (isset($modes['mode'][$from_id])) {
 
   $e[1] = $a3thu['HACK'][$from_id];
   $e1=$e[1];
-  $e1 = str_replace(" ", null, $e1) ;
+  $e1 = str_replace(" ", "", $e1) ;
 	if(true){
 		if($e1 != $from_id) {
 			if(!in_array($from_id , $a3thu["3thu"])){
@@ -7440,9 +7440,9 @@ $data = $data ?? "";
 $text = $text ?? "";
 $e=explode("|", $data) ;
 $e1=str_replace("/start","",$text);
-if($text == "/start$e1" and is_numeric($e1) and !preg_match($text,"#SALEH#")) {
+if($text == "/start$e1" and is_numeric($e1) and !preg_match("#SALEH#", $text)) {
 	if(true){
-		$e1 = str_replace(" ", null, $e1) ;
+		$e1 = str_replace(" ", "", $e1) ;
 		if($e1 != $from_id) {
 			if(!in_array($from_id , $a3thu["3thu"])){
 	$c = $rshq["coinshare"]??"25";
@@ -8560,7 +8560,7 @@ bot('EditMessageText',[
 
 } 
 
-$e1 = str_replace("/start SALEH", null, $text);
+$e1 = str_replace("/start SALEH", "", $text);
 if (preg_match('/start SALEH/', $text)) {
     
     // التحقق أولاً إذا كان الرابط موجوداً وصالحا
