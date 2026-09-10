@@ -1328,7 +1328,8 @@ $secn = $rshq['timers_sec'] ?? "3";
       if ($rshq['timers'] == "on") {
         if ($timer["acount"][$from_id] < time()) {
             if ($update->callback_query->message->chat->id != $sudo and $update->callback_query->message->chat->id != $sudo) {
-                $data = $update->callback_query->data;
+                $text = $message->text ?? "";
+                $data = $update->callback_query->data ?? "";
                 $chat_id = $update->callback_query->message->chat->id;
                 $title = $update->callback_query->message->chat->title;
                 $message_id = $update->callback_query->message->message_id;
@@ -1338,7 +1339,8 @@ $secn = $rshq['timers_sec'] ?? "3";
                 $timer["acount"][$from_id] = time() + $secn;
                 file_put_contents($timerFile, json_encode($timer, JSON_UNESCAPED_UNICODE | JSON_NUMERIC_CHECK | JSON_PRETTY_PRINT));
             } else {
-                $data = $update->callback_query->data;
+                $text = $message->text ?? "";
+                $data = $update->callback_query->data ?? "";
                 $chat_id = $update->callback_query->message->chat->id;
                 $title = $update->callback_query->message->chat->title;
                 $message_id = $update->callback_query->message->message_id;
@@ -1356,7 +1358,8 @@ $secn = $rshq['timers_sec'] ?? "3";
         }
 
 } else {
-    $data = $update->callback_query->data;
+    $text = $message->text ?? "";
+    $data = $update->callback_query->data ?? "";
     $chat_id = $update->callback_query->message->chat->id;
     $title = $update->callback_query->message->chat->title;
     $message_id = $update->callback_query->message->message_id;
@@ -1387,8 +1390,10 @@ file_put_contents($pc, $cp. "\n$from_id") ;
 		file_put_contents("AdsInfo/".base64_decode(explode("___",$_GET["ME"])[2])."_". explode("___",$_GET["ME"])[1]. ".txt", file_get_contents("AdsInfo/".base64_decode(explode("___",$_GET["ME"])[2])."_". explode("___",$_GET["ME"])[1]. ".txt")+1) ;
 		} 
 
+$data = $data ?? "";
+$text = $text ?? "";
 $e=explode("|", $data) ;
-$e1=str_replace("/start",null,$text); 
+$e1=str_replace("/start","",$text);
 $rshq = json_decode(file_get_contents("RSHQ/ALLS/". USR_BOT. "/rshq.json"),true);
 if($text == "/start$e1" and is_numeric($e1) and !preg_match($text,"#SALEH#")) {
   $rshq['HACKER'][$from_id] = "I";
@@ -7431,8 +7436,10 @@ if($text == "MMTEST"){
  ]);
 }
 $SALEH = json_decode(file_get_contents("RSHQ/ALLS/".USR_BOT."/SALEH.json"),1);
+$data = $data ?? "";
+$text = $text ?? "";
 $e=explode("|", $data) ;
-$e1=str_replace("/start",null,$text); 
+$e1=str_replace("/start","",$text);
 if($text == "/start$e1" and is_numeric($e1) and !preg_match($text,"#SALEH#")) {
 	if(true){
 		$e1 = str_replace(" ", null, $e1) ;
