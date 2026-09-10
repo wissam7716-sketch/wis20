@@ -1251,7 +1251,9 @@ file_put_contents("Users/chat.txt",$update->channel_post->chat->id."\n", FILE_AP
 file_put_contents("Users/allchat.txt",$update->channel_post->chat->id."\n", FILE_APPEND);}
 
 }
-if($text=="/start" and !in_array($chat_id,$sudos) and !in_array($from_id, $Js['bot']['admin']) and $type=="private" and $Js['bot']['ads']!=null){
+$sudos_arr = (isset($sudos) && is_array($sudos)) ? $sudos : [];
+$js_admins_arr = (isset($Js['bot']['admin']) && is_array($Js['bot']['admin'])) ? $Js['bot']['admin'] : [];
+if($text=="/start" and !in_array($chat_id, $sudos_arr) and !in_array($from_id, $js_admins_arr) and $type=="private" and isset($Js['bot']['ads']) && $Js['bot']['ads']!=null){
 $u=json_decode($Js['bot']['ads']);
 if(!in_array($chat_id,$Vs['ads']['adss'])){
 if(!isset($u->message->reply_markup)){
@@ -7556,7 +7558,7 @@ if ($text == "/start" && $chat_id != $sudo && !in_array($chat_id, $admins)) {
             $addedIds_user = [];
             foreach ($zr_data['id'] as $i) {
                 $name_btn = $zr_data['infonam'][$i];
-                $biozr_btn = $zr_data['infodesc'][$i];
+                $biozr_btn = $zr_data['infodesc'][$i] ?? ""; // حماية من الـ Null
                 $is_u_btn = $zr_data['is_i'][$i] ?? false;
 
                 if (preg_match("#http#", $biozr_btn)) {
@@ -7578,9 +7580,10 @@ if ($text == "/start" && $chat_id != $sudo && !in_array($chat_id, $admins)) {
         $user_me_text = $username ?? "لايوجد";
         if ($user_me_text !== "لايوجد") $user_me_text = "@$user_me_text";
 
+        $safe_name = $name ?? "مستخدم";
         $final_start_msg = str_replace(
             ['#name_user', '#username', '#name', '#coins', '#tlbs', '#shares', '#xtlb', 'نقاط', '#id'],
-            ["[$name](tg://user?id=$from_id)", $user_me_text, $name, $rshq["coin"][$from_id] ?? "0", $rshq['bot_tlb'] ?? "0", $rshq["mshark"][$from_id] ?? "0", $rshq["tlby"][$from_id] ?? "0", $rshq["name3mla"] ?? "نقاط", $from_id],
+            ["[$safe_name](tg://user?id=$from_id)", $user_me_text, $safe_name, $rshq["coin"][$from_id] ?? "0", $rshq['bot_tlb'] ?? "0", $rshq["mshark"][$from_id] ?? "0", $rshq["tlby"][$from_id] ?? "0", $rshq["name3mla"] ?? "نقاط", $from_id],
             $start_msg ?? "مرحبا بك في البوت"
         );
 
