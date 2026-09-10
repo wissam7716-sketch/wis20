@@ -3829,7 +3829,7 @@ if ($user_me === null) {
     $user_me = "@$user_me";
 }
 
-$member_get = explode("\n", file_get_contents($member_name));
+$member_get = explode("\n", @file_get_contents($member_name) ?: "");
 
 if (!in_array($from_id, $member_get)) {
     file_put_contents($member_name, $from_id . "\n", FILE_APPEND);
@@ -3854,8 +3854,8 @@ if (!in_array($from_id, $member_get)) {
     }
 }
 
-$chanel_get = explode('\n', @file_get_contents($chanel_name));
-$group_get = explode('\n', @file_get_contents($group_name));
+$chanel_get = explode("\n", @file_get_contents($chanel_name) ?: "");
+$group_get = explode("\n", @file_get_contents($group_name) ?: "");
 if($update->my_chat_member->chat->id){
     if($update->my_chat_member->chat->type == 'channel'){
 if (!in_array($update->my_chat_member->chat->id, $chanel_get)) {
@@ -3870,7 +3870,8 @@ if (!in_array($update->my_chat_member->chat->id, $chanel_get)) {
 }
 }
 
-if($blockers[$from_id] == true or $blockers[$user] == true or $blockers[$user_me] == true){
+$blockers = is_array($blockers) ? $blockers : [];
+if((isset($blockers[$from_id]) && $blockers[$from_id] == true) || (isset($blockers[$user]) && $blockers[$user] == true) || (isset($blockers[$user_me]) && $blockers[$user_me] == true)){
 die();
 }
 
@@ -4222,15 +4223,15 @@ if(explode(":",$data)[0] == "enter"){
       $is_u = $zr['is_i'][$i];
   
       if (preg_match("#http#", $biozr)) {
-          $key['inline_keyboard'][] = [[text => "$name", url => $biozr]];
+          $key['inline_keyboard'][] = [['text' => "$name", 'url' => $biozr]];
       } elseif ($is_u == true) {
           if (!isset($fuck[$i])) {
-              $key['inline_keyboard'][] = [[text => "$name", callback_data => "$i"]];
+              $key['inline_keyboard'][] = [['text' => "$name", 'callback_data' => "$i"]];
               $fuck[$i] = "o"; 
           }
       } else {
           if (!isset($fuck[$i])) {
-              $key['inline_keyboard'][] = [[text => "$name", callback_data => "enter:$i"]];
+              $key['inline_keyboard'][] = [['text' => "$name", 'callback_data' => "enter:$i"]];
               $fuck[$i] = "o"; 
           }
       }
